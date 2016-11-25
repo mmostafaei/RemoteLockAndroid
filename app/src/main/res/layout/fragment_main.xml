@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:background="#000">
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/llOpenDoor"
+        android:layout_marginTop="91dp"
+        android:gravity="center"
+        android:layout_below="@+id/shimmer_tv"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView"
+            android:src="@mipmap/open_door"
+            android:layout_below="@+id/llOpenDoor"
+            android:layout_centerHorizontal="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="باز کردن قفل "
+            android:id="@+id/textView3"
+            android:textColor="#fff"
+            android:layout_below="@+id/imageView"
+            android:layout_centerHorizontal="true"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/llChangePass"
+        android:gravity="center"
+        android:layout_below="@+id/llOpenDoor"
+        android:layout_alignLeft="@+id/llOpenDoor"
+        android:layout_alignStart="@+id/llOpenDoor"
+        android:layout_marginTop="86dp"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView2"
+            android:src="@mipmap/change_pass"
+            android:layout_below="@+id/llOpenDoor"
+            android:layout_centerHorizontal="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="تقییر رمز"
+            android:id="@+id/textView4"
+            android:textColor="#fff"
+            android:layout_below="@+id/imageView2"
+            android:layout_centerHorizontal="true"/>
+    </LinearLayout>
+
+    <com.romainpiel.shimmer.ShimmerTextView
+        android:id="@+id/shimmer_tv"
+        android:text="Wrong Code!"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#ff0000"
+        android:textStyle="bold"
+        android:textSize="26sp"
+        android:layout_marginBottom="42dp"
+        android:layout_above="@+id/connect"
+        android:layout_centerHorizontal="true"/>
+
+
+
+
+
+    <com.bcgdv.asia.lib.connectpattern.ConnectPatternView
+        android:id="@+id/connect"
+        android:padding="32dp"
+        android:layout_width="350dp"
+        android:layout_height="350dp"
+        app:connectPatternAnimationType="middle"
+        app:connectPatternNumber="nine"
+        app:connectPatternCircleColor="#fabd13"
+        app:connectPatternLineColor="#fff"
+        app:connectPatternCircleRadius="20dp"
+        app:connectPatternLineWidth="5dp"
+        app:connectPatternDrawable="@mipmap/point"
+        android:layout_marginBottom="53dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone"
+        android:background="#000"/>
+
+
+    <com.github.jlmd.animatedcircleloadingview.AnimatedCircleLoadingView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/circle_loading_view"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:background="#000"
+        android:layout_centerInParent="true"
+        app:mainColor="#00ff00"
+        app:secondaryColor="#0000ff"
+        app:textColor="@android:color/white"
+        android:visibility="gone"/>
+
+</RelativeLayout>
