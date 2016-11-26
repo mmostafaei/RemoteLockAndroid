@@ -2,11 +2,7 @@ package ir.mmostafaei.patternlock.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 
-import com.bcgdv.asia.lib.connectpattern.ConnectPatternView;
-
-import java.util.ArrayList;
 
 import ir.mmostafaei.patternlock.R;
 

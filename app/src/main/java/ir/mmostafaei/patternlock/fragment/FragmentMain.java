@@ -22,13 +22,14 @@ import java.util.ArrayList;
 
 import ir.mmostafaei.patternlock.R;
 import ir.mmostafaei.patternlock.app.MyApplication;
+import ir.mmostafaei.patternlock.socket.OpenSocket;
 
 
 public class FragmentMain extends Fragment {
 
   private static final String TAG = FragmentMain.class.getSimpleName();
   View view;
-  String imei;
+
   Shimmer shimmer;
 
   @Override
@@ -38,9 +39,8 @@ public class FragmentMain extends Fragment {
     final ConnectPatternView connect = (ConnectPatternView) view.findViewById(R.id.connect);
     final ShimmerTextView txtWrongCode = (ShimmerTextView) view.findViewById(R.id.shimmer_tv);
     final AnimatedCircleLoadingView animatedCircleLoadingView = (AnimatedCircleLoadingView) view.findViewById(R.id.circle_loading_view);
-    final LinearLayout llOpenDoor=(LinearLayout)view.findViewById(R.id.llOpenDoor);
-    final LinearLayout llChangePass=(LinearLayout)view.findViewById(R.id.llChangePass);
-
+    final LinearLayout llOpenDoor = (LinearLayout) view.findViewById(R.id.llOpenDoor);
+    final LinearLayout llChangePass = (LinearLayout) view.findViewById(R.id.llChangePass);
 
 
     shimmer = new Shimmer();
@@ -98,6 +98,24 @@ public class FragmentMain extends Fragment {
         connect.setVisibility(View.GONE);
         llChangePass.setVisibility(View.VISIBLE);
         llOpenDoor.setVisibility(View.VISIBLE);
+      }
+    });
+
+
+    llOpenDoor.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        OpenSocket.Listener listener = new OpenSocket.Listener() {
+          @Override
+          public void onDataRecived(String data) {
+            Log.e(TAG, "onDataRecived: " + data);
+          }
+        };
+        OpenSocket openSocket = new OpenSocket();
+        openSocket.dataToSend("OpenDoor=93111")
+          //.listener(listener)
+          .start();
+
       }
     });
 
