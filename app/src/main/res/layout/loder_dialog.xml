@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dip"
+    android:layout_height="100dip"
+              android:orientation="vertical"
+  >
+
+
+  <RelativeLayout android:layout_width="match_parent" android:layout_height="match_parent" android:gravity="center"
+                  android:layout_centerInParent="true">
+    <ImageView android:layout_width="42dp" android:layout_height="42dp" android:id="@+id/imageView25"
+               android:src="@mipmap/splash" android:layout_centerInParent="true"/>
+    <ProgressBar android:id="@+id/progressBar5" android:layout_width="65dip" android:layout_height="65dip"
+                 android:indeterminateDrawable="@drawable/custom_progressbar" android:layout_centerInParent="true"/>
+  </RelativeLayout>
+</LinearLayout>

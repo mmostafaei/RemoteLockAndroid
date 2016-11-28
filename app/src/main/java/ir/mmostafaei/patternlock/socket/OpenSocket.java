@@ -3,6 +3,7 @@ package ir.mmostafaei.patternlock.socket;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -13,6 +14,9 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 
 import ir.mmostafaei.patternlock.app.MyApplication;
+import ir.mmostafaei.patternlock.dialog.ConnectToLockWifiGuideDialog;
+import ir.mmostafaei.patternlock.dialog.ShowMessageDialog;
+import ir.mmostafaei.patternlock.dialog.ShowMessageOptionalDialog;
 
 /***
  * Created by mohsen on 11/26/2016.
@@ -30,6 +34,8 @@ public class OpenSocket {
 
   public interface Listener {
     void onDataRecived(String data);
+
+    void onFailedSocketConnection();
   }
 
   public OpenSocket listener(Listener listener) {
@@ -82,8 +88,8 @@ public class OpenSocket {
       socket.connect((new InetSocketAddress(ip, port)), timeOut);
       OutputStream stream = socket.getOutputStream();
       BufferedReader inputStream = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-      dataToSend = dataToSend + "\r\n";
-      stream.write(dataToSend.trim().getBytes());
+      dataToSend = dataToSend;
+      stream.write(dataToSend.getBytes());
       if (listener != null) {
         String message = inputStream.readLine();
         onDataRecived(message);
@@ -113,11 +119,15 @@ public class OpenSocket {
     handler.post(new Runnable() {
       @Override
       public void run() {
-        Toast.makeText(MyApplication.context, "مشکلی در ارتباط با سرور به وجود امد لطفا ارتباط گوشی با شبکه را بررسی کنید : ",
-          Toast.LENGTH_SHORT).show();
+        if (listener != null) {
+          listener.onFailedSocketConnection();
+        } else {
+          ShowMessageDialog.show("لطفا از ارتباط دستگاه خود به وایفای مطمُن شوید.");
+        }
       }
     });
   }
+
 
   private void closeSocket(Socket socket) {
     if (socket.isConnected()) {

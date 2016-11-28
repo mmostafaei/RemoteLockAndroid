@@ -3,4 +3,8 @@
     <color name="colorPrimary">#000</color>
     <color name="colorPrimaryDark">#000</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="color_preloader_start">#00222222</color>
+    <color name="color_preloader_center">#22ffd715</color>
+    <color name="color_preloader_end">#ffd715</color>
 </resources>

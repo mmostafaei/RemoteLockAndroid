@@ -41,7 +41,7 @@
         android:orientation="vertical"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:id="@+id/llChangePass"
+        android:id="@+id/llSettings"
         android:gravity="center"
         android:layout_below="@+id/llOpenDoor"
         android:layout_alignLeft="@+id/llOpenDoor"
@@ -53,14 +53,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/imageView2"
-            android:src="@mipmap/change_pass"
+            android:src="@mipmap/settings"
             android:layout_below="@+id/llOpenDoor"
             android:layout_centerHorizontal="true"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="تقییر رمز"
+            android:text="تنظیمات"
             android:id="@+id/textView4"
             android:textColor="#fff"
             android:layout_below="@+id/imageView2"
@@ -76,7 +76,7 @@
         android:textStyle="bold"
         android:textSize="26sp"
         android:layout_marginBottom="42dp"
-        android:layout_above="@+id/connect"
+        android:layout_above="@+id/connect1"
         android:layout_centerHorizontal="true"/>
 
 
@@ -84,7 +84,7 @@
 
 
     <com.bcgdv.asia.lib.connectpattern.ConnectPatternView
-        android:id="@+id/connect"
+        android:id="@+id/connect1"
         android:padding="32dp"
         android:layout_width="350dp"
         android:layout_height="350dp"

@@ -11,6 +11,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -22,10 +23,15 @@ import android.widget.TextView;
 
 import ir.mmostafaei.patternlock.R;
 import ir.mmostafaei.patternlock.app.ChangerFragment;
+import ir.mmostafaei.patternlock.app.DataHolderCustom;
 import ir.mmostafaei.patternlock.app.MyApplication;
 import ir.mmostafaei.patternlock.app.PrefManager;
 
+import ir.mmostafaei.patternlock.dialog.ConnectToLockWifiGuideDialog;
+import ir.mmostafaei.patternlock.dialog.ShowMessageOptionalDialog;
+import ir.mmostafaei.patternlock.fragment.ChangePatternLevel1;
 import ir.mmostafaei.patternlock.fragment.FragmentMain;
+import ir.mmostafaei.patternlock.socket.OpenSocket;
 import ir.mmostafaei.patternlock.type_face.TypefaceUtil;
 
 
@@ -62,21 +68,16 @@ public class ActivitySplash extends AppCompatActivity {
       window.setStatusBarColor(Color.BLACK);
     }
 
-//    llMain = (LinearLayout) findViewById(R.id.llMain);
-//    final ViewGroup viewGroup = (ViewGroup) ((ViewGroup) this
-//      .findViewById(android.R.id.content)).getChildAt(0);
-//
-//    TypefaceUtil.overrideFonts(MyApplication.currentActivity, viewGroup);
+    llMain = (LinearLayout) findViewById(R.id.llMain);
+    final ViewGroup viewGroup = (ViewGroup) ((ViewGroup) this
+      .findViewById(android.R.id.content)).getChildAt(0);
+
+    TypefaceUtil.overrideFonts(MyApplication.currentActivity, viewGroup);
 
 
     navigation();
 
   }
-
-
-
-
-
 
 
   @Override
@@ -92,18 +93,57 @@ public class ActivitySplash extends AppCompatActivity {
   }
 
 
-
   private void navigation() {
     MyApplication.handler.postDelayed(new Runnable() {
       @Override
       public void run() {
-        Fragment fragment = new FragmentMain();
-        ChangerFragment.replaceSplashFragments(fragment, FragmentMain.class.getSimpleName(), false);
+        OpenSocket.Listener listener = new OpenSocket.Listener() {
+          @Override
+          public void onDataRecived(String data) {
+            Log.e(TAG, "onDataRecived: pass" + data);
+            data = data.replace("DoorPass=", "");
+            data = data.trim();
+
+            DataHolderCustom.getInstance().password = data;
+
+            Fragment fragment;
+            String fragmentFlag;
+            if (data.equals("47421")) {
+              fragment = new ChangePatternLevel1();
+              fragmentFlag = ChangePatternLevel1.class.getSimpleName();
+            } else {
+              fragment = new FragmentMain();
+              fragmentFlag = FragmentMain.class.getSimpleName();
+            }
+            ChangerFragment.replaceSplashFragments(fragment, fragmentFlag, false);
+
+          }
+
+          @Override
+          public void onFailedSocketConnection() {
+            ShowMessageOptionalDialog.show("لطفا از وصل بودن دستگاه خود به وایفای مطمُن شوید");
+            ShowMessageOptionalDialog.btnOtherOption.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                ConnectToLockWifiGuideDialog.show();
+              }
+            });
+            ShowMessageOptionalDialog.btnClose.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                ShowMessageOptionalDialog.dialog.dismiss();
+                MyApplication.currentActivity.finish();
+              }
+            });
+          }
+        };
+
+        OpenSocket openSocket = new OpenSocket();
+        openSocket.dataToSend("GetPass=93111").listener(listener).start();
+
       }
     }, 2000);
   }
-
-
 
 
   @Override

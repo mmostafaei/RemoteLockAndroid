@@ -13,7 +13,7 @@
     android:background="#000">
 
     <com.bcgdv.asia.lib.connectpattern.ConnectPatternView
-        android:id="@+id/connect"
+        android:id="@+id/connect1"
         android:padding="32dp"
         android:layout_width="350dp"
         android:layout_height="350dp"
