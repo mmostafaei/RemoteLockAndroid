@@ -13,7 +13,7 @@
     <application
         android:allowBackup="true"
         android:name=".app.MyApplication"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/splash"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
@@ -21,7 +21,9 @@
             android:name=".activity.MainActivity"
             android:screenOrientation="portrait">
         </activity>
-
+        <activity android:name=".activity.OpenDoorActivity"
+            android:theme="@style/Theme.AppCompat.Dialog"
+            />
         <activity
             android:name=".activity.ActivitySplash"
 
@@ -32,6 +34,22 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+
+        <receiver
+            android:icon="@mipmap/splash"
+            android:label="smart Lock"
+            android:name=".widget.MyWidgetProvider" >
+            <intent-filter >
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_info" />
+        </receiver>
+
+
     </application>
 
 </manifest>

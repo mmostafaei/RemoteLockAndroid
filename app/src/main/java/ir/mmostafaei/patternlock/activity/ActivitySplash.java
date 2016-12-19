@@ -108,7 +108,7 @@ public class ActivitySplash extends AppCompatActivity {
 
             Fragment fragment;
             String fragmentFlag;
-            if (data.equals("47421")) {
+            if (data.equals("474210000")) {
               fragment = new ChangePatternLevel1();
               fragmentFlag = ChangePatternLevel1.class.getSimpleName();
             } else {
@@ -139,7 +139,7 @@ public class ActivitySplash extends AppCompatActivity {
         };
 
         OpenSocket openSocket = new OpenSocket();
-        openSocket.dataToSend("GetPass=93111").listener(listener).start();
+        openSocket.dataToSend("GetPass=").listener(listener).start();
 
       }
     }, 2000);

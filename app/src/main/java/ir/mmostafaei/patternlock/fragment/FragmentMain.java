@@ -130,7 +130,8 @@ public class FragmentMain extends Fragment {
 
         };
         OpenSocket openSocket = new OpenSocket();
-        openSocket.dataToSend("OpenDoor=" + DataHolderCustom.getInstance().password)
+        openSocket
+          .dataToSend("OpenDoor=" + DataHolderCustom.getInstance().password)
           .listener(listener)
           .start();
         LoadingDialog.makeLoder();

@@ -10,7 +10,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".activity.MainActivity"
-    android:background="#000">
+    >
 
     <com.bcgdv.asia.lib.connectpattern.ConnectPatternView
         android:id="@+id/connect1"
